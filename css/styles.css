@@ -304,7 +304,7 @@ body {
     var(--color-bg-section) 12%,
     var(--color-bg-section) 100%
   );
-  padding-top: var(--spacing-3xl);
+  padding-top: var(--spacing-4xl);
   margin-top: -var(--spacing-xl);
   position: relative;
 }
@@ -324,6 +324,11 @@ body {
     transparent 100%
   );
   opacity: 0.6;
+}
+
+/* About section title - white color */
+#about .section-title {
+  color: #ffffff;
 }
 
 /* Transition 2: About → Education (Subtle Divider with Spacing) */
@@ -1101,6 +1106,166 @@ body {
 }
 
 /* ============================================
+   ENGAGEMENTS & ROLES - Integrated into About section
+   ============================================ */
+.engagements-wrapper {
+  margin-top: var(--spacing-3xl);
+  padding-top: var(--spacing-2xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.engagements-intro {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-light);
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: var(--line-height-relaxed);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.engagements-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-xl);
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.engagement-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  transition: var(--transition-slow);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.engagement-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-border);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-slow);
+}
+
+.engagement-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  border-color: var(--color-accent);
+}
+
+.engagement-card:hover::before {
+  transform: scaleX(1);
+  background: var(--color-accent);
+}
+
+.engagement-primary {
+  border: 2px solid var(--color-accent);
+  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-light) 100%);
+}
+
+.engagement-primary::before {
+  background: var(--color-accent);
+  transform: scaleX(1);
+}
+
+.engagement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.engagement-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-text);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.01em;
+  flex: 1;
+  min-width: 200px;
+}
+
+.engagement-primary .engagement-title {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.engagement-badge {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.engagement-primary .engagement-badge {
+  background: var(--color-accent);
+  color: #ffffff;
+  border-color: var(--color-accent);
+}
+
+.engagement-description {
+  color: var(--color-text-light);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+  font-size: var(--font-size-base);
+  flex-grow: 1;
+}
+
+/* Mobile: Stack cards vertically */
+@media screen and (max-width: 768px) {
+  .engagements-wrapper {
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-xl);
+  }
+
+  .engagements-intro {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .engagements-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .engagement-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .engagement-title {
+    min-width: auto;
+  }
+}
+
+/* ============================================
    PROJECTS SECTION - Card grid
    ============================================ */
 .projects-header {
@@ -1371,8 +1536,8 @@ body {
   margin: 0 auto;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.4s ease-in-out,
-              transform 0.4s ease-in-out;
+  transition: opacity 1.5s ease-in-out,
+              transform 1.5s ease-in-out;
   pointer-events: none;
   padding-left: var(--spacing-4xl);
   padding-right: var(--spacing-4xl);
@@ -1604,7 +1769,7 @@ body {
   }
 
   #about.content-section {
-    padding-top: var(--spacing-2xl);
+    padding-top: var(--spacing-3xl);
     margin-top: -var(--spacing-md);
   }
 
@@ -1696,7 +1861,7 @@ body {
   }
 
   #about.content-section {
-    padding-top: var(--spacing-2xl);
+    padding-top: var(--spacing-3xl);
     margin-top: -var(--spacing-sm);
   }
 
