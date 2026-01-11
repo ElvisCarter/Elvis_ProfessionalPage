@@ -1320,7 +1320,7 @@ body {
 }
 
 /* ============================================
-   QUOTE BANNER - Premium founder principles
+   QUOTE BANNER - Clean rotating carousel
    ============================================ */
 .quote-banner {
   background: linear-gradient(to bottom,
@@ -1331,130 +1331,104 @@ body {
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
   position: relative;
-  overflow: hidden;
 }
 
 .quote-banner::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 2px;
   background: linear-gradient(to right,
     transparent,
     var(--color-accent),
     transparent
   );
-  opacity: 0.3;
+  opacity: 0.4;
 }
 
-.quote-banner-container {
-  max-width: 1400px;
+.quote-banner-wrapper {
+  max-width: 1000px;
   margin: 0 auto;
   position: relative;
 }
 
-.quote-banner-track {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.quote-banner-queue {
   position: relative;
-  min-height: 120px;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: var(--spacing-lg) 0;
-  overflow: hidden;
 }
 
-/* Queue container - only one quote visible at a time */
-.quote-item {
+.quote {
   position: absolute;
   left: 0;
   right: 0;
-  top: 50%;
-  transform: translateY(-50%) translateY(20px);
-  padding: var(--spacing-md) var(--spacing-2xl);
-  font-size: var(--font-size-base);
+  text-align: center;
+  font-size: var(--font-size-lg);
   color: var(--color-text);
   font-weight: 400;
-  letter-spacing: -0.01em;
   line-height: 1.6;
-  text-align: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out,
-              transform 0.3s ease-in-out,
-              visibility 0s 0.3s;
-  pointer-events: none;
+  letter-spacing: -0.01em;
+  padding: var(--spacing-md) var(--spacing-2xl);
   max-width: 900px;
-  width: 100%;
   margin: 0 auto;
-  padding-left: var(--spacing-3xl);
-  padding-right: var(--spacing-3xl);
-  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease-in-out,
+              transform 0.4s ease-in-out;
+  pointer-events: none;
+  padding-left: var(--spacing-4xl);
+  padding-right: var(--spacing-4xl);
 }
 
-.quote-item::before {
+.quote::before {
   content: '"';
   position: absolute;
   left: var(--spacing-lg);
-  top: -0.2em;
+  top: -0.1em;
+  font-size: 3.5em;
   color: var(--color-accent);
-  opacity: 0.5;
-  font-size: 3em;
-  line-height: 1;
-  font-weight: 300;
+  opacity: 0.4;
   font-family: Georgia, serif;
+  font-weight: 300;
+  line-height: 1;
 }
 
-.quote-item::after {
+.quote::after {
   content: '"';
   position: absolute;
   right: var(--spacing-lg);
-  bottom: -0.3em;
+  bottom: -0.2em;
+  font-size: 3.5em;
   color: var(--color-accent);
-  opacity: 0.5;
-  font-size: 3em;
-  line-height: 1;
-  font-weight: 300;
+  opacity: 0.4;
   font-family: Georgia, serif;
+  font-weight: 300;
+  line-height: 1;
 }
 
-/* Active quote - only one visible at a time */
-.quote-item.active {
+.quote.active {
   opacity: 1;
-  visibility: visible;
-  transform: translateY(-50%) translateY(0);
+  transform: translateY(0);
   pointer-events: auto;
   z-index: 10;
-  transition: opacity 0.3s ease-in-out,
-              transform 0.3s ease-in-out,
-              visibility 0s 0s;
 }
 
-/* Previous quote - completely hidden */
-.quote-item.prev {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-50%) translateY(-20px);
-  z-index: 1;
-  transition: opacity 0.3s ease-in-out,
-              transform 0.3s ease-in-out,
-              visibility 0s 0.3s;
-}
-
-/* All other quotes - completely hidden */
-.quote-item:not(.active):not(.prev) {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* First quote visible by default (fallback if JS doesn't load) */
-.quote-item:first-child:not(.active):not(.prev) {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(-50%) translateY(0);
-  z-index: 10;
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .quote {
+    transition: none;
+    transform: none;
+  }
+  
+  .quote.active {
+    transform: none;
+  }
 }
 
 /* Respect reduced motion preference */

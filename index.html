@@ -905,176 +905,124 @@
     })();
   </script>
 
-  <script>
-    // Quote Banner Carousel - Smoothly rotating carousel
-    (function() {
-      'use strict';
-
-      function initQuoteCarousel() {
-        const track = document.getElementById('quoteBannerTrack');
-        if (!track) {
-          console.warn('Quote banner track not found');
-          return;
-        }
-
-        const quotes = Array.from(track.querySelectorAll('.quote-item'));
-        if (quotes.length === 0) {
-          console.warn('No quotes found');
-          return;
-        }
-
-        // Check for reduced motion preference
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        
-        // For reduced motion, show first quote only
-        if (prefersReducedMotion) {
-          quotes.forEach((quote, index) => {
-            quote.classList.remove('active', 'prev');
-            if (index === 0) {
-              quote.classList.add('active');
-            }
-          });
-          return;
-        }
-
-        // Carousel state
-        let currentIndex = 0;
-        let rotationInterval = null;
-        let isPaused = false;
-        const ROTATION_DELAY = 1500; // 1.5 seconds - faster rotation
-
-        // Initialize: show first quote, hide others
-        function initializeCarousel() {
-          quotes.forEach((quote, index) => {
-            quote.classList.remove('active', 'prev');
-            if (index === 0) {
-              quote.classList.add('active');
-            }
-          });
-          currentIndex = 0;
-        }
-
-        // Rotate to next quote - queue-based approach
-        function rotateQuote() {
-          if (isPaused || quotes.length === 0) return;
-
-          // Remove active from current quote
-          const prevIndex = currentIndex;
-          quotes[prevIndex].classList.remove('active');
-          quotes[prevIndex].classList.add('prev');
-
-          // Move to next quote in queue (loop back to start)
-          currentIndex = (currentIndex + 1) % quotes.length;
-          
-          // Ensure all other quotes are hidden
-          quotes.forEach((quote, index) => {
-            if (index !== currentIndex && index !== prevIndex) {
-              quote.classList.remove('active', 'prev');
-            }
-          });
-          
-          // Add active to new quote
-          quotes[currentIndex].classList.remove('prev');
-          quotes[currentIndex].classList.add('active');
-
-          // Clean up prev class after animation completes
-          setTimeout(() => {
-            quotes[prevIndex].classList.remove('prev');
-          }, 300);
-        }
-
-        // Start rotation
-        function startRotation() {
-          if (rotationInterval) {
-            clearInterval(rotationInterval);
-          }
-          rotationInterval = setInterval(rotateQuote, ROTATION_DELAY);
-        }
-
-        // Pause rotation
-        function pauseRotation() {
-          isPaused = true;
-          if (rotationInterval) {
-            clearInterval(rotationInterval);
-            rotationInterval = null;
-          }
-        }
-
-        // Resume rotation
-        function resumeRotation() {
-          isPaused = false;
-          startRotation();
-        }
-
-        // Event listeners
-        track.addEventListener('mouseenter', pauseRotation);
-        track.addEventListener('mouseleave', resumeRotation);
-        track.addEventListener('focusin', pauseRotation);
-        track.addEventListener('focusout', resumeRotation);
-        track.addEventListener('touchstart', pauseRotation);
-        track.addEventListener('touchend', function() {
-          setTimeout(resumeRotation, 3000);
-        });
-
-        // Initialize and start
-        initializeCarousel();
-        startRotation();
-
-        // Cleanup
-        window.addEventListener('beforeunload', function() {
-          if (rotationInterval) {
-            clearInterval(rotationInterval);
-          }
-        });
-
-        console.log('✓ Quote carousel: ' + quotes.length + ' quotes, rotating every ' + ROTATION_DELAY + 'ms');
-      }
-
-      // Initialize when ready
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initQuoteCarousel);
-      } else {
-        // Small delay to ensure DOM is fully ready
-        setTimeout(initQuoteCarousel, 100);
-      }
-    })();
-  </script>
-
-  <!-- Quote Banner: Subtle rotating carousel of founder principles -->
+  <!-- Quote Banner: Clean rotating carousel -->
   <section class="quote-banner" aria-label="Founder principles">
-    <div class="quote-banner-container">
-      <div class="quote-banner-track" id="quoteBannerTrack" aria-live="polite">
-        <!-- Quotes array - easy to edit -->
-        <!-- Themes: market fit, lifecycle, systems, incentives, execution, scale, simplicity, reliability -->
-        <div class="quote-item" data-quote="0">Architecture decisions compound over time.</div>
-        <div class="quote-item" data-quote="1">Real market fit beats vanity metrics.</div>
-        <div class="quote-item" data-quote="2">Systems that scale start with simplicity.</div>
-        <div class="quote-item" data-quote="3">Technical depth without product thinking fails.</div>
-        <div class="quote-item" data-quote="4">Build for operational reality, not ideals.</div>
-        <div class="quote-item" data-quote="5">Early technical choices define long-term costs.</div>
-        <div class="quote-item" data-quote="6">Reliability is a feature, not a trade-off.</div>
-        <div class="quote-item" data-quote="7">Understand incentives before building systems.</div>
-        <div class="quote-item" data-quote="8">Full lifecycle thinking prevents technical debt.</div>
-        <div class="quote-item" data-quote="9">Code is a means, not the end.</div>
-        <div class="quote-item" data-quote="10">Scale requires discipline, not complexity.</div>
-        <div class="quote-item" data-quote="11">Production reveals what architecture documents hide.</div>
-        <div class="quote-item" data-quote="12">Market fit isn't found. It's engineered through feedback and focus.</div>
-        <div class="quote-item" data-quote="13">Scale reveals every shortcut you took in the MVP.</div>
-        <div class="quote-item" data-quote="14">Build the system that builds the product.</div>
-        <div class="quote-item" data-quote="15">Simple wins—until it's wrong. Then simplicity becomes precision.</div>
-        <div class="quote-item" data-quote="16">Execution is a feature. Reliability is a product.</div>
-        <div class="quote-item" data-quote="17">Architecture is strategy written in code.</div>
-        <div class="quote-item" data-quote="18">Incentives shape behavior. Behavior shapes outcomes.</div>
-        <div class="quote-item" data-quote="19">Speed matters—clarity determines whether it compounds.</div>
-        <div class="quote-item" data-quote="20">Great products reduce friction before they add features.</div>
-        <div class="quote-item" data-quote="21">If users don't return, nothing else matters.</div>
-        <div class="quote-item" data-quote="22">The best roadmap is a learning loop.</div>
-        <div class="quote-item" data-quote="23">Security and trust are design choices, not checklists.</div>
-        <div class="quote-item" data-quote="24">Every decision has a cost—great teams pay it intentionally.</div>
-        <div class="quote-item" data-quote="25">Build for today's constraints, design for tomorrow's scale.</div>
+    <div class="quote-banner-wrapper">
+      <div class="quote-banner-queue" id="quoteBannerQueue" aria-live="polite">
+        <!-- Quotes - easy to edit -->
+        <div class="quote">Architecture decisions compound over time.</div>
+        <div class="quote">Real market fit beats vanity metrics.</div>
+        <div class="quote">Systems that scale start with simplicity.</div>
+        <div class="quote">Technical depth without product thinking fails.</div>
+        <div class="quote">Build for operational reality, not ideals.</div>
+        <div class="quote">Early technical choices define long-term costs.</div>
+        <div class="quote">Reliability is a feature, not a trade-off.</div>
+        <div class="quote">Understand incentives before building systems.</div>
+        <div class="quote">Full lifecycle thinking prevents technical debt.</div>
+        <div class="quote">Code is a means, not the end.</div>
+        <div class="quote">Scale requires discipline, not complexity.</div>
+        <div class="quote">Production reveals what architecture documents hide.</div>
+        <div class="quote">Market fit isn't found. It's engineered through feedback and focus.</div>
+        <div class="quote">Scale reveals every shortcut you took in the MVP.</div>
+        <div class="quote">Build the system that builds the product.</div>
+        <div class="quote">Simple wins—until it's wrong. Then simplicity becomes precision.</div>
+        <div class="quote">Execution is a feature. Reliability is a product.</div>
+        <div class="quote">Architecture is strategy written in code.</div>
+        <div class="quote">Incentives shape behavior. Behavior shapes outcomes.</div>
+        <div class="quote">Speed matters—clarity determines whether it compounds.</div>
+        <div class="quote">Great products reduce friction before they add features.</div>
+        <div class="quote">If users don't return, nothing else matters.</div>
+        <div class="quote">The best roadmap is a learning loop.</div>
+        <div class="quote">Security and trust are design choices, not checklists.</div>
+        <div class="quote">Every decision has a cost—great teams pay it intentionally.</div>
+        <div class="quote">Build for today's constraints, design for tomorrow's scale.</div>
       </div>
     </div>
   </section>
+
+  <script>
+    // Quote Banner Carousel - Clean implementation
+    (function() {
+      'use strict';
+
+      function initQuoteBanner() {
+        const queue = document.getElementById('quoteBannerQueue');
+        if (!queue) return;
+
+        const quotes = Array.from(queue.querySelectorAll('.quote'));
+        if (quotes.length === 0) return;
+
+        // Check for reduced motion
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+          quotes[0].classList.add('active');
+          return;
+        }
+
+        let currentIndex = 0;
+        let interval = null;
+        let isPaused = false;
+        const DELAY = 1500; // 1.5 seconds per quote
+
+        // Show first quote
+        quotes[0].classList.add('active');
+
+        // Rotate to next quote
+        function nextQuote() {
+          if (isPaused) return;
+
+          // Hide current
+          quotes[currentIndex].classList.remove('active');
+          
+          // Show next
+          currentIndex = (currentIndex + 1) % quotes.length;
+          quotes[currentIndex].classList.add('active');
+        }
+
+        // Start rotation
+        function start() {
+          if (interval) clearInterval(interval);
+          interval = setInterval(nextQuote, DELAY);
+        }
+
+        // Pause
+        function pause() {
+          isPaused = true;
+          if (interval) {
+            clearInterval(interval);
+            interval = null;
+          }
+        }
+
+        // Resume
+        function resume() {
+          isPaused = false;
+          start();
+        }
+
+        // Event listeners
+        queue.addEventListener('mouseenter', pause);
+        queue.addEventListener('mouseleave', resume);
+        queue.addEventListener('touchstart', pause);
+        queue.addEventListener('touchend', () => setTimeout(resume, 2000));
+
+        // Start
+        start();
+
+        // Cleanup
+        window.addEventListener('beforeunload', () => {
+          if (interval) clearInterval(interval);
+        });
+      }
+
+      // Initialize
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initQuoteBanner);
+      } else {
+        initQuoteBanner();
+      }
+    })();
+  </script>
 
   <!-- Footer: Professional and minimal -->
   <footer class="main-footer">
