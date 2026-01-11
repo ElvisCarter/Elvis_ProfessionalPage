@@ -213,21 +213,112 @@ body {
   margin-bottom: var(--spacing-2xl);
   display: flex;
   justify-content: center;
+  position: relative;
+}
+
+/* Thought bubble container with profile picture at bottom center */
+.thought-bubble-container {
+  background: #ffffff;
+  border-radius: 30px;
+  padding: var(--spacing-2xl) var(--spacing-xl) var(--spacing-xl);
+  max-width: 500px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: float 3s ease-in-out infinite;
+}
+
+.thought-bubble-container::before {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #ffffff;
+}
+
+.thought-bubble-container::after {
+  content: '';
+  position: absolute;
+  bottom: -35px;
+  left: calc(50% - 30px);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 
+    20px 8px 0 0 #ffffff,
+    40px 4px 0 0 #ffffff;
+}
+
+.thought-bubble-content {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  width: 100%;
+}
+
+.thought-bubble-text {
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+  margin: 0 0 var(--spacing-sm) 0;
+  font-style: italic;
+}
+
+.thought-bubble-author {
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
+  margin: 0;
+  font-weight: 500;
 }
 
 .profile-image {
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   object-fit: cover;
   transition: var(--transition-slow);
+  position: relative;
+  z-index: 1;
 }
 
 .profile-image:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Mobile: Adjust thought bubble container */
+@media screen and (max-width: 768px) {
+  .thought-bubble-container {
+    max-width: 90%;
+    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg);
+  }
+
+  .thought-bubble-text {
+    font-size: var(--font-size-sm);
+  }
+
+  .profile-image {
+    width: 120px;
+    height: 120px;
+  }
 }
 
 .hero-text {
