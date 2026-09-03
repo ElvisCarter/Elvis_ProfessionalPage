@@ -1,0 +1,9 @@
+{
+  "contactForm": {
+    "endpoint": "https://api.web3forms.com/submit",
+    "accessKey": ""
+  },
+  "archivedResumes": {
+    "passwordHash": "YOUR_SHA256_HASH_FROM_setup_script"
+  }
+}

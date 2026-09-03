@@ -1,0 +1,237 @@
+﻿================================================================================
+RESUME Elvis_Segbeaya_Resume_Data_AI_Enterprise_Architect_3.0.pdf
+================================================================================
+--- page 1 ---
+ELVIS SEGBEAYA
+Katy, TX 77449 | 346.264.6837 | segbeayaelvis@gmail.com | linkedin.com/in/uniquely-elvis
+PRINCIPAL ARCHITECT ╖ DATA, AI & ENTERPRISE PLATFORMS
+Architect with an unusual span: a decade spent moving from quantitative modeling and data engineering into full ownership of
+enterprise platform, cloud, and AI governance. Designs the data protection and platform architecture a regulated business runs on
+ù one that tripled revenue ($26M to $81M) in two years while the technology function stayed a single seat, builds the reporting
+layer executives decide from, and leads responsible AI adoption as a standing governance function rather than a one-off project.
+Formally credentialed in the business-technology bridge through an M.S. in Technology Commercialization from UT Austin
+(McCombs), on a B.S. in Mathematics.
+CORE COMPETENCIES
+Architecture & Governance: Enterprise data and security model design, permission architecture, event-driven patterns, technical
+standards, platform evolution decisions, key-person risk and continuity planning
+Data Engineering & Protection: ETL pipeline design, data migration, data quality controls and governance, AWS backup
+architecture, retention and recovery strategy, regulatory and audit compliance
+AI & Technology Enablement: AI adoption strategy, phased Claude implementation, user enablement, responsible-use guardrails
+and MCP access control, emerging technology evaluation
+Analytics & Reporting: Python, R, SQL/T-SQL, Power BI, Tableau, SSRS, profile-tailored dashboards at organizational scale, statistical
+and financial modeling, forecasting
+Platform Engineering: Salesforce architecture (Apex, Lightning Web Components, SFDX, Flow, Platform Events), AWS, Microsoft
+Entra app registrations, connected apps, REST/JSON integrations
+Industry Exposure: Financial services (CDO/CLO structures, derivative pricing, risk exposure), government/DoD and CMMC support,
+aviation aftermarket, energy, retail and supply chain
+PROFESSIONAL EXPERIENCE
+Source One Spares FEB 2024 û PRESENT
+Solutions Engineer ù operating as Platform & Technology Governance Lead | [City, ST]
+Aviation aftermarket parts distributor; revenue grew from $26M to $53M to $81M across this period. Owns enterprise platform
+architecture, cloud data protection, business systems, and AI enablement as a single function.
+ò Lead organizational AI adoption as a standing governance function ù phased Claude implementation, user enablement,
+capability evaluation, and responsible-use guardrails including deliberate restriction of MCP access during controlled rollout.
+ò Architected AWS-based backup and recovery for the full enterprise data estate ù standard records, binary files, and bulk
+datasets ù with the supporting infrastructure, retention model, and data protection and recovery strategy.
+ò Hold full architecture ownership of the enterprise Salesforce platform: data model, security and permission architecture,
+automation, and integration design, including a complete production migration into GovCloud.
+ò Designed and built Tower, a search platform that branches across and connects disconnected systems to shorten time-to-data;
+internally estimated at approximately $2M in annual business value.
+ò Deliver dashboards at organizational scale, tailored to each user profile type, so reporting reflects what each role actually
+decides on.
+ò Diagnosed a silent production failure in approval automation ù submissions cancelled within roughly two seconds, no error, no
+standard log trace ù by querying internal audit tables directly and reading execution timing patterns in the data.
+ò Ruled out three remediation approaches on managed-package, platform, and data-integrity grounds, then implemented a
+Platform Event queue decoupling submission into a separate transaction: an enterprise distributed-systems pattern applied
+without custom code or vendor modification.
+ò Automated core business processes including threshold-based purchase approvals, vendor risk listing, shop management
+correlation, payment processing, and Net 30 terms.
+ò Support the government/DoD business line with compliant workflows and contributed to CMMC certification through
+implementation and gap remediation.
+ò Act as the cross-functional bridge between business operations, engineering, administration, and executive technology needs.
+NOV FEB 2023 û FEB 2024
+Software Engineer, Application Support | Houston, TX (Remote)
+
+--- page 2 ---
+ò Led troubleshooting and root-cause analysis for enterprise applications serving oil and gas operations, using Python, SQL, AWS,
+and DevOps tooling.
+ò Instrumented and analyzed application logs in AWS CloudWatch to isolate recurring failure patterns and improve platform
+stability.
+ò Drove feature development and API integration work (REST, JSON, Postman) alongside cross-functional Agile teams tracked in
+Jira.
+ò Authored installation guides, user manuals, and release notes; reviewed and standardized documentation produced by junior
+engineers.
+BNY Mellon ù Corporate Trust JUN 2022 û OCT 2022
+Lead Analyst, Data Management & Quantitative Analysis | Houston, TX (Remote)
+ò Led a team of 9û12 analysts building and maintaining CDO/CLO deal models, reports, and user tools derived from legal
+documentation and client specifications.
+ò Built ETL pipelines extracting from disparate sources into warehouse targets, and implemented data quality controls, governance
+policies, and security measures for regulatory compliance.
+ò Reviewed, modified, and tested changes to complex financial models; analyzed moderately complex structures and
+amendments; supported audit examination and response.
+ò Collaborated with international cross-functional teams across IT, operations, risk, and compliance to align analytics initiatives.
+ò Introduced a structured training pipeline and peer-review system that raised delivery consistency across a fully remote team.
+BNY Mellon ù Loan Conversion Platform MAY 2020 û MAY 2022
+Analytics Analyst I | Houston, TX (Remote)
+ò Developed statistical, financial, and econometric models analyzing asset performance, securities data, derivative pricing, and risk
+exposure.
+ò Ran production models, identified exceptions, and implemented corrective action; interpreted findings and authored standard
+reporting.
+ò Served as designated product-launch tester, validating use-case scenarios from end-user and internal-staff perspectives.
+EARLIER EXPERIENCE
+Grocers Supply SEP 2018 û JUN 2019
+Data Analyst | Houston, TX
+ò Executed a data migration of 40,000+ product records and restructured in-store layout and design patterns.
+ò Automated a manual consolidation process with VBA/macros and built SSRS, Tableau, and Power BI reporting for pricing and
+demand forecasting.
+ò Marketing and pricing analysis credited with a ~20% increase in company revenue.
+WageWorks JUL 2016 û MAY 2018
+Account Consultant | Irving, TX
+ò Primary point of contact for assigned benefits-program clients; ran performance reviews, training, and feedback cycles,
+coordinating with operations, sales, and product to resolve issues.
+EDUCATION
+M.S., Technology Commercialization ù McCombs School of Business, The University of Texas at Austin
+STEM-designated program in technology transfer, commercialization strategy, and venture planning. Ranked #3 nationally for entrepreneurship
+(Eduniversal) at time of completion.
+B.S., Mathematics ù University of Houston
+
+================================================================================
+ADDENDUM Elvis_Segbeaya_Resume_Addendum.pdf
+================================================================================
+--- page 1 ---
+ELVIS SEGBEAYA
+Katy, TX 77449 | 346.264.6837 | segbeayaelvis@gmail.com | linkedin.com/in/uniquely-elvis
+RESUME ADDENDUM ╖ ROLE CONTEXT & SELECTED WORK
+This addendum accompanies my resume. A resume compresses work into single lines, which tends to preserve what was built and
+lose why it was built that way. The material below expands on the scope of my current role, the reasoning behind several
+architecture decisions, and the constraints those decisions were made under. It is written to be read alongside the resume rather
+than in place of it.
+1. ROLE CONTEXT ù TITLE VS. OPERATING SCOPE
+My title at Source One Spares is Solutions Engineer. The role I actually perform is broader than that title suggests, and I would rather
+explain the gap directly than let it be discovered mid-process.
+I joined in February 2024 into a role scoped around data analysis, business reporting, and solution support. Over the following two
+years the company grew from $26M to $53M to $81M in revenue. The technology function did not grow with it; scope consolidated
+into the role I already held. Today I own the following domains as a single position:
+Domain What I own
+Salesforce Platform Architecture Data model, security model, permission set and profile architecture, automation strategy, Apex
+and Lightning Web Component development, integration design
+Cloud & Infrastructure AWS backup architecture, data protection and retention strategy, recovery planning, cloud
+integrations
+Business Systems Engineering Process automation, third-party integrations, accounting and procurement workflow,
+operational improvements
+AI & Technology Enablement AI adoption strategy, phased Claude implementation, user enablement, responsible-use
+guardrails ù a standing function, not a completed project
+Technology Governance Technical standards, platform evolution decisions, security and compliance support, vendor and
+technology evaluation
+In most organizations this scope is distributed across roughly five positions ù Salesforce architect, cloud engineer, business systems
+administrator, automation engineer, and an AI enablement lead ù each reporting into technology leadership. The advantage of
+consolidating it has been speed and coherence: architecture decisions do not have to be negotiated across teams, and the platform
+stayed consistent while the business tripled. The cost is capacity and key-person concentration, which is a structural fact rather than
+a complaint.
+The practical relevance to a hiring conversation: my title understates the work, and I am looking for a role where the title, scope, and
+authority match from the start.
+2. SELECTED CASE ù A PRODUCTION FAILURE WITH NO ERROR MESSAGE
+I include this one because it is the clearest evidence of how I work, and because the difficulty of it is not visible from a resume bullet.
+The presenting problem. Automate purchase-order approval routing in Salesforce. On its face, a routine configuration task.
+The actual problem. Approval submissions were being cancelled roughly two seconds after creation. There was no error message,
+no failed-record notification, and nothing in the standard system logs. From the userÆs perspective the submission simply did not
+exist. The cause was a conflict between the internal approval process and protected background code inside the AvSight managed
+package ù code that cannot be inspected or modified.
+Diagnosis. Because standard logging showed nothing, I queried SalesforceÆs internal audit tables directly and analyzed the execution
+timing patterns across submissions. The timing signature is what identified the conflict; nothing in the ordinary troubleshooting
+surface would have surfaced it.
+Three approaches evaluated and rejected
+ò Direct modification of the conflicting logic ù blocked by managed-package restrictions. The code is sealed by the vendor.
+
+--- page 2 ---
+ò An alternative platform-native approach ù blocked by Salesforce platform limitations in that execution context.
+ò A time-delay workaround ù rejected on business grounds before it was built. It would have appeared to work in testing. It
+would also have failed intermittently once real users began editing PO line items after submission, producing an approval
+process that mostly works and occasionally recalls a PO silently. In a procurement workflow that is an audit exposure, not an
+inconvenience. This was the more important of the three rejections, because it was the one that would have shipped.
+The solution
+A Platform Event queue that decouples approval submission into a separate, clean transaction, removing the resource conflict
+entirely. This is the same event-driven pattern used to resolve contention in payment processing and order management systems. It
+was implemented declaratively ù no custom code, no changes to the vendor package, no dependence on undocumented platform
+behavior ù and it scales with transaction volume without modification.
+Time distribution. Roughly 90% of the effort went to understanding the problem and 10% to building the fix. That ratio is normal for
+root-cause work and is the inverse of what a fast workaround produces: a quick resolution with an invisible liability underneath it.
+3. SALESFORCE GOVCLOUD MIGRATION
+Source One Spares supports government and DoD business, which requires operating in a compliance-aligned environment. I led the
+migration of the full production AvSight/Salesforce environment out of the native environment and into GovCloud.
+ò Object and data migration across the full org, including custom configuration and historical records.
+ò Permission architecture rebuilt rather than copied ù a migration is one of the few opportunities to correct accumulated
+permission drift instead of carrying it forward.
+ò Security model alignment against the compliance requirements of the target environment.
+ò Automation migration, followed by post-cutover validation and troubleshooting across affected business processes.
+This ran alongside ongoing operational support rather than as a dedicated project with backfill.
+4. TOWER ù CROSS-SYSTEM SEARCH PLATFORM
+The recurring operational problem was not missing data; it was that answering a single business question required touching several
+disconnected systems, and the time cost of that lookup was paid many times a day across the company.
+I designed and built Tower, a search layer that branches across those systems and connects them into a single retrieval path, then
+delivered successive iterations as usage patterns clarified what people were actually looking for.
+Internally, the platform has been estimated at approximately $2M in annual business value. I want to be precise about that figure: it
+is an internal estimate of time and efficiency recovered, not an audited financial result, and I present it as such.
+5. DATA PROTECTION ù AWS BACKUP & RECOVERY ARCHITECTURE
+SalesforceÆs native protections do not constitute a backup strategy, and the gap is easy to miss until it matters. I designed and
+implemented a full backup architecture on AWS, along with the supporting infrastructure required for it to run reliably and
+unattended.
+ò Coverage extends beyond standard records to binary files and bulk datasets ù the categories most often left out of a nominal
+backup and most painful to lose.
+ò Retention model, data protection strategy, and recovery planning designed as one thing, since a backup with no tested recovery
+path is a filing system.
+ò Scoped external access: limited-permission AWS access shared with third parties where required, with dedicated integration
+users rather than shared credentials.
+6. AI ADOPTION & GOVERNANCE
+I lead AI adoption for the organization as a standing function rather than a rollout project, on the view that adoption keeps
+producing new governance questions as capability expands.
+ò Phased implementation of Claude across the organization, with user enablement rather than tool distribution ù adoption
+failures are usually enablement failures.
+ò Responsible-use guardrails, including deliberate restriction of MCP (Model Context Protocol) access during controlled rollout.
+Connecting a model directly to production systems is a meaningfully different risk posture than assisted work, and I did not want
+that decision made implicitly.
+
+--- page 3 ---
+ò Ongoing evaluation of AI and adjacent technology for organizational fit.
+7. GOVERNMENT / DOD SUPPORT & COMPLIANCE
+I support the government and DoD business line with the workflows, automation, and process design that operating in that space
+requires.
+On CMMC certification I want to be accurate about my role: I contributed as a supporting team member, assisting with
+implementation and gap remediation. I was not the lead driver of the certification effort, and I would not want that inferred from a
+resume line. Related to this, I have applied self-directed cybersecurity knowledge to help close organizational gaps where the need
+appeared and no one else was positioned to address it.
+8. TECHNOLOGY ENVIRONMENT
+Salesforce: Apex, Lightning Web Components, SFDX, SOQL, Flow, Platform Events, approval processes, permission set and profile
+architecture, managed-package constraint navigation (AvSight), GovCloud.
+Cloud & identity: AWS (backup architecture, storage, retention, recovery), Microsoft Entra application registrations, connected
+apps, OAuth, integration user provisioning.
+Data & reporting: SQL/T-SQL, Python, Power BI, Tableau, SSRS, ETL and data migration, dashboard design tailored by user profile.
+Delivery: Agile/Jira, GitHub, REST/JSON API integration, Postman, technical documentation and standards.
+9. CAREER ARC ù WHY THIS PATH READS THE WAY IT DOES
+My background moves from quantitative and data work into platform architecture, which is less common than the reverse and
+shows up in how I approach problems. The consistent thread is not a technology or an industry ù it is analysis and system design
+applied to whatever the domain happened to be.
+ò At BNY Mellon I built and maintained deal models for CDO/CLO structures, then led a team of 9û12 analysts doing the same.
+That work established the habit of treating data discrepancies as signals with causes rather than records to correct.
+ò In application support at NOV I worked root-cause analysis on production systems at scale, which is directly upstream of how I
+approached the approval-process failure described above.
+ò My M.S. in Technology Commercialization (UT Austin, McCombs) is a STEM-designated program in technology transfer and
+commercialization strategy ù a formal credential in the business-to-technology translation function, rather than a general
+technical or business degree.
+The through-line is that I have not specialized into either the technical or the business side. I do the architecture and the
+implementation, and I can explain the tradeoff to a developer and the risk to an executive in the same conversation.
+10. WHAT I AM LOOKING FOR
+A principal or staff-level architecture role on an individual-contributor track ù scope and decision authority over architecture,
+standards, and governance, rather than people management. I am open to management later; I am not seeking it as the mechanism
+for advancement now.
+I am industry agnostic, and I mean that structurally rather than as a willingness to adapt. My depth is not a vertical. It is system
+design, analysis, and architectural reasoning ù decomposing an ambiguous problem, finding the constraint that actually governs it,
+and designing something that holds under that constraint. Aviation aftermarket, financial services, and energy are where I have
+applied that; they are not what I know. The underlying problems ù data and security modeling, integration under vendor
+constraints, resilience, governance under compliance requirements ù are the same problems wearing different domain vocabulary.
+Paired with an M.S. in Technology Commercialization, that combination covers what a technical executive function actually consists
+of: deciding what should be built, judging whether a proposed solution is structurally sound before it is committed to, and
+translating between the engineering case and the business case without losing either one. I have been performing that function
+without the title. I am looking for a role where the two align.
+References, additional detail on any item above, and walkthroughs of the technical decisions are available on request.
+

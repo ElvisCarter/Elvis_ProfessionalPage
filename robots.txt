@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /asset/Resumes/archive/
+
+Sitemap: https://elviscarter.github.io/Elvis_ProfessionalPage/sitemap.xml

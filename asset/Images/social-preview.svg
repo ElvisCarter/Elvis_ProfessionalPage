@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#101827"/>
+  <circle cx="600" cy="280" r="8" fill="#B65F3A"/>
+  <circle cx="420" cy="180" r="5" fill="#F3EBDD" opacity="0.9"/>
+  <circle cx="780" cy="180" r="5" fill="#F3EBDD" opacity="0.9"/>
+  <circle cx="420" cy="380" r="5" fill="#F3EBDD" opacity="0.9"/>
+  <circle cx="780" cy="380" r="5" fill="#F3EBDD" opacity="0.9"/>
+  <path d="M420 180L600 280M780 180L600 280M420 380L600 280M780 380L600 280" stroke="#B65F3A" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <text x="600" y="480" text-anchor="middle" fill="#F3EBDD" font-family="Georgia, serif" font-size="52" font-weight="600">Elvis S.</text>
+  <text x="600" y="530" text-anchor="middle" fill="#77736D" font-family="Arial, sans-serif" font-size="28">Architect of Human-Centered Systems</text>
+</svg>
