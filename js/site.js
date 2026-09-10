@@ -46,6 +46,24 @@
 
   }
 
+  function siteConfigUrl() {
+
+    var script = document.querySelector('script[src*="site.js"]');
+
+    if (script && script.src) {
+
+      try {
+
+        return new URL('../data/site-config.json', script.src).href;
+
+      } catch (err) { /* fall through */ }
+
+    }
+
+    return 'data/site-config.json';
+
+  }
+
 
 
   /* ── Mobile navigation ── */
@@ -800,7 +818,7 @@
 
 
 
-    fetch('data/site-config.json')
+    fetch(siteConfigUrl())
 
       .then(function (res) { return res.ok ? res.json() : {}; })
 
@@ -976,7 +994,27 @@
 
 
 
-    fetch('data/site-config.json')
+    var existingIframe = embedWrap && embedWrap.querySelector('iframe[src*="docs.google.com/forms"]');
+
+    if (existingIframe) {
+
+      if (primaryLabel && primaryLabel.textContent.trim() === 'Send an inquiry') {
+
+        primaryLink.href = '#contact-embed-wrap';
+
+        primaryLink.removeAttribute('target');
+
+        primaryLink.removeAttribute('rel');
+
+      }
+
+      return;
+
+    }
+
+
+
+    fetch(siteConfigUrl())
 
       .then(function (res) { return res.ok ? res.json() : {}; })
 
@@ -1014,19 +1052,31 @@
 
           if (!label && primaryLabel) primaryLabel.textContent = 'Send an inquiry';
 
+          primaryLink.href = '#contact-embed-wrap';
+
+          primaryLink.removeAttribute('target');
+
+          primaryLink.removeAttribute('rel');
+
         } else if (isCalendlyUrl(linkUrl || embedUrl)) {
 
           if (!label && primaryLabel) primaryLabel.textContent = 'Schedule a conversation';
 
+          primaryLink.href = linkUrl || embedUrl;
+
+          primaryLink.target = '_blank';
+
+          primaryLink.rel = 'noopener noreferrer';
+
+        } else {
+
+          primaryLink.href = linkUrl || embedUrl;
+
+          primaryLink.target = '_blank';
+
+          primaryLink.rel = 'noopener noreferrer';
+
         }
-
-
-
-        primaryLink.href = linkUrl || embedUrl;
-
-        primaryLink.target = '_blank';
-
-        primaryLink.rel = 'noopener noreferrer';
 
 
 
