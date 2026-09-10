@@ -645,27 +645,18 @@
       <div class="container container-narrow">
         <header class="section-header section-header-light">
           <h2 id="contact-title" class="section-title">Bring me the complex problem that crosses boundaries.</h2>
-          <p class="section-lead">Send an inquiry below, or connect on LinkedIn.</p>
+          <p class="section-lead">Open the inquiry form, or connect on LinkedIn.</p>
         </header>
 
         <div class="contact-pathways">
-          <a id="contact-intake-primary" class="contact-path contact-path-primary" href="#contact-embed-wrap" data-track="contact_click" data-track-label="intake">
+          <button type="button" id="contact-intake-primary" class="contact-path contact-path-primary" aria-haspopup="dialog" aria-controls="contact-modal" data-track="contact_click" data-track-label="intake">
             <span>Start here</span>
             <strong id="contact-intake-primary-label">Send an inquiry</strong>
-          </a>
+          </button>
           <a href="https://www.linkedin.com/in/uniquely-elvis/" class="contact-path" target="_blank" rel="noopener noreferrer" data-track="contact_click" data-track-label="linkedin">
             <span>Professional</span>
             <strong>LinkedIn</strong>
           </a>
-        </div>
-
-        <div id="contact-embed-wrap" class="contact-embed-wrap" aria-label="Contact intake form">
-          <iframe
-            src="https://docs.google.com/forms/d/e/1FAIpQLSfuPpZwWYwx1i25O_gwVSvKO58tC4-0KdmM5nSNGUfqeTshAg/viewform?embedded=true"
-            title="Send an inquiry — Elvis S."
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            allow="fullscreen">Loading inquiry form…</iframe>
         </div>
       </div>
     </section>
@@ -687,6 +678,26 @@
     </aside>
 
   </main>
+
+  <div id="contact-modal" class="contact-modal" aria-hidden="true">
+    <div class="contact-modal-backdrop" data-contact-modal-close tabindex="-1" aria-hidden="true"></div>
+    <div class="contact-modal-panel" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
+      <header class="contact-modal-header">
+        <h2 id="contact-modal-title" class="contact-modal-title">Send an inquiry</h2>
+        <button type="button" class="contact-modal-close" data-contact-modal-close aria-label="Close inquiry form">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </header>
+      <div id="contact-embed-wrap" class="contact-modal-body" aria-label="Contact intake form">
+        <iframe
+          data-src="https://docs.google.com/forms/d/e/1FAIpQLSfuPpZwWYwx1i25O_gwVSvKO58tC4-0KdmM5nSNGUfqeTshAg/viewform?embedded=true"
+          title="Send an inquiry — Elvis S."
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allow="fullscreen"></iframe>
+      </div>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="container footer-inner">

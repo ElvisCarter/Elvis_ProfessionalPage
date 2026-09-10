@@ -982,37 +982,139 @@
     return url.replace(/[?#].*$/, '').replace(/\/?$/, '/viewform');
   }
 
+  function initContactModal(primaryControl, embedWrap, modalTitle) {
+
+    var modal = document.getElementById('contact-modal');
+
+    if (!modal || !primaryControl) return null;
+
+    var lastFocus = null;
+
+    function ensureIframeLoaded() {
+
+      if (!embedWrap) return;
+
+      var iframe = embedWrap.querySelector('iframe');
+
+      if (!iframe) return;
+
+      var pendingSrc = iframe.getAttribute('data-src');
+
+      if (pendingSrc && !iframe.getAttribute('src')) {
+
+        iframe.setAttribute('src', pendingSrc);
+
+      }
+
+    }
+
+    function openModal() {
+
+      lastFocus = document.activeElement;
+
+      ensureIframeLoaded();
+
+      modal.classList.add('is-open');
+
+      modal.setAttribute('aria-hidden', 'false');
+
+      document.body.classList.add('contact-modal-open');
+
+      var closeBtn = modal.querySelector('.contact-modal-close');
+
+      if (closeBtn) closeBtn.focus();
+
+    }
+
+    function closeModal() {
+
+      modal.classList.remove('is-open');
+
+      modal.setAttribute('aria-hidden', 'true');
+
+      document.body.classList.remove('contact-modal-open');
+
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+
+    }
+
+    primaryControl.addEventListener('click', function (e) {
+
+      e.preventDefault();
+
+      openModal();
+
+    });
+
+    modal.querySelectorAll('[data-contact-modal-close]').forEach(function (el) {
+
+      el.addEventListener('click', closeModal);
+
+    });
+
+    document.addEventListener('keydown', function (e) {
+
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+
+    });
+
+    if (modalTitle) {
+
+      var titleEl = document.getElementById('contact-modal-title');
+
+      if (titleEl) titleEl.textContent = modalTitle;
+
+    }
+
+    return { open: openModal, close: closeModal };
+
+  }
+
+  function mountGoogleFormEmbed(embedWrap, embedUrl, title) {
+
+    if (!embedWrap || !embedUrl) return;
+
+    var iframe = document.createElement('iframe');
+
+    iframe.setAttribute('data-src', embedUrl);
+
+    iframe.title = title || 'Contact inquiry form';
+
+    iframe.loading = 'lazy';
+
+    iframe.setAttribute('frameborder', '0');
+
+    iframe.setAttribute('marginheight', '0');
+
+    iframe.setAttribute('marginwidth', '0');
+
+    embedWrap.innerHTML = '';
+
+    embedWrap.appendChild(iframe);
+
+  }
+
   function initContactSection() {
 
-    var primaryLink = document.getElementById('contact-intake-primary');
+    var primaryControl = document.getElementById('contact-intake-primary');
 
     var primaryLabel = document.getElementById('contact-intake-primary-label');
 
     var embedWrap = document.getElementById('contact-embed-wrap');
 
-    if (!primaryLink) return;
+    if (!primaryControl) return;
 
-
-
-    var existingIframe = embedWrap && embedWrap.querySelector('iframe[src*="docs.google.com/forms"]');
+    var existingIframe = embedWrap && embedWrap.querySelector('iframe[data-src*="docs.google.com/forms"], iframe[src*="docs.google.com/forms"]');
 
     if (existingIframe) {
 
-      if (primaryLabel && primaryLabel.textContent.trim() === 'Send an inquiry') {
+      var defaultLabel = primaryLabel && primaryLabel.textContent.trim();
 
-        primaryLink.href = '#contact-embed-wrap';
-
-        primaryLink.removeAttribute('target');
-
-        primaryLink.removeAttribute('rel');
-
-      }
+      initContactModal(primaryControl, embedWrap, defaultLabel || 'Send an inquiry');
 
       return;
 
     }
-
-
 
     fetch(siteConfigUrl())
 
@@ -1034,89 +1136,61 @@
 
         var useEmbed = contact.intakeEmbed !== false;
 
-
+        var displayLabel = label || 'Send an inquiry';
 
         if (label && primaryLabel) primaryLabel.textContent = label;
 
-
-
         if (!linkUrl && !embedUrl) return;
-
-
 
         if (isGoogleFormUrl(linkUrl || embedUrl)) {
 
-          linkUrl = googleFormLinkUrl(linkUrl || embedUrl);
-
           embedUrl = googleFormEmbedUrl(embedUrl || linkUrl);
 
-          if (!label && primaryLabel) primaryLabel.textContent = 'Send an inquiry';
+          if (!label && primaryLabel) primaryLabel.textContent = displayLabel;
 
-          primaryLink.href = '#contact-embed-wrap';
-
-          primaryLink.removeAttribute('target');
-
-          primaryLink.removeAttribute('rel');
+          initContactModal(primaryControl, embedWrap, displayLabel);
 
         } else if (isCalendlyUrl(linkUrl || embedUrl)) {
 
-          if (!label && primaryLabel) primaryLabel.textContent = 'Schedule a conversation';
+          displayLabel = label || 'Schedule a conversation';
 
-          primaryLink.href = linkUrl || embedUrl;
+          if (!label && primaryLabel) primaryLabel.textContent = displayLabel;
 
-          primaryLink.target = '_blank';
+          if (useEmbed && embedWrap && embedUrl) {
 
-          primaryLink.rel = 'noopener noreferrer';
+            initContactModal(primaryControl, embedWrap, displayLabel);
+
+          } else {
+
+            primaryControl.addEventListener('click', function () {
+
+              window.open(linkUrl || embedUrl, '_blank', 'noopener,noreferrer');
+
+            });
+
+          }
 
         } else {
 
-          primaryLink.href = linkUrl || embedUrl;
+          primaryControl.addEventListener('click', function () {
 
-          primaryLink.target = '_blank';
+            window.open(linkUrl || embedUrl, '_blank', 'noopener,noreferrer');
 
-          primaryLink.rel = 'noopener noreferrer';
+          });
 
         }
 
-
-
         if (!useEmbed || !embedWrap || !embedUrl) return;
-
-
-
-        embedWrap.hidden = false;
-
-
 
         if (isGoogleFormUrl(embedUrl)) {
 
-          var iframe = document.createElement('iframe');
-
-          iframe.src = embedUrl;
-
-          iframe.title = label || 'Contact inquiry form';
-
-          iframe.loading = 'lazy';
-
-          iframe.setAttribute('frameborder', '0');
-
-          iframe.setAttribute('marginheight', '0');
-
-          iframe.setAttribute('marginwidth', '0');
-
-          embedWrap.innerHTML = '';
-
-          embedWrap.appendChild(iframe);
+          mountGoogleFormEmbed(embedWrap, embedUrl, displayLabel);
 
           return;
 
         }
 
-
-
         if (!isCalendlyUrl(embedUrl)) return;
-
-
 
         if (!document.querySelector('link[data-calendly-widget]')) {
 
@@ -1131,8 +1205,6 @@
           document.head.appendChild(widgetCss);
 
         }
-
-
 
         function mountCalendly() {
 
@@ -1152,8 +1224,6 @@
 
         }
 
-
-
         if (window.Calendly) {
 
           mountCalendly();
@@ -1161,8 +1231,6 @@
           return;
 
         }
-
-
 
         var widgetScript = document.createElement('script');
 

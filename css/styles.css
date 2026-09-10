@@ -1083,40 +1083,112 @@ html.reduce-motion .thought-bubble-stack { animation: none !important; }
   border-color: var(--color-burnished-copper);
   background: rgba(182, 95, 58, 0.1);
 }
-.contact-embed-wrap {
-  margin-top: var(--space-7);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: var(--color-soft-white);
-  min-height: 720px;
+
+/* Contact intake modal */
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition), visibility var(--transition);
 }
-.contact-embed-wrap iframe {
+.contact-modal.is-open {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+}
+.contact-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(16, 24, 39, 0.78);
+  backdrop-filter: blur(4px);
+}
+.contact-modal-panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(920px, 100%);
+  max-height: min(92vh, 880px);
+  background: var(--color-soft-white);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 64px rgba(16, 24, 39, 0.35);
+  overflow: hidden;
+}
+.contact-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-soft-white);
+}
+.contact-modal-title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-midnight-ink);
+}
+.contact-modal-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-graphite);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.contact-modal-close:hover,
+.contact-modal-close:focus-visible {
+  border-color: var(--color-burnished-copper);
+  color: var(--color-burnished-copper);
+  outline: none;
+}
+.reduce-motion .contact-modal { transition: none; }
+.contact-modal-body {
+  flex: 1;
+  min-height: 0;
+  background: var(--color-soft-white);
+}
+.contact-modal-body iframe {
   display: block;
   width: 100%;
-  min-height: 720px;
+  height: min(78vh, 760px);
   border: 0;
   background: var(--color-soft-white);
 }
-.contact-embed-wrap .calendly-inline-widget {
+.contact-modal-body .calendly-inline-widget {
   width: 100%;
-  min-height: 700px;
+  min-height: min(78vh, 760px);
 }
+body.contact-modal-open { overflow: hidden; }
 
 /* Contact — calm closing emergence */
 .contact-section.is-visible .section-header,
-.contact-section.is-visible .contact-pathways,
-.contact-section.is-visible .contact-embed-wrap {
+.contact-section.is-visible .contact-pathways {
   animation: contactEmerge var(--motion-slow) var(--ease-emerge) both;
 }
 .contact-section.is-visible .contact-pathways { animation-delay: 100ms; }
-.contact-section.is-visible .contact-embed-wrap { animation-delay: 180ms; }
 @keyframes contactEmerge {
   from { opacity: 0; transform: translateY(var(--shift-md)); }
   to { opacity: 1; transform: none; }
 }
 .reduce-motion .contact-section.is-visible .section-header,
-.reduce-motion .contact-section.is-visible .contact-pathways,
-.reduce-motion .contact-section.is-visible .contact-embed-wrap { animation: none; }
+.reduce-motion .contact-section.is-visible .contact-pathways { animation: none; }
 
 .section-bridge--ivory-navy::before {
   display: none;
@@ -1144,6 +1216,16 @@ html.reduce-motion .thought-bubble-stack { animation: none !important; }
   padding: var(--space-4); text-decoration: none; color: inherit;
   border: 1px solid var(--color-border-dark); border-radius: var(--radius-lg);
   transition: var(--transition);
+}
+button.contact-path {
+  appearance: none;
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+button.contact-path:not(.contact-path-primary) {
+  background: transparent;
 }
 .contact-path:hover { border-color: var(--color-signal-teal); background: rgba(182, 95, 58, 0.1); color: var(--color-warm-ivory); }
 .contact-path span { font-size: var(--text-xs); color: rgba(243,235,221,0.65); text-transform: uppercase; letter-spacing: 0.05em; }
