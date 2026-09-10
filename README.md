@@ -38,26 +38,39 @@ Because GitHub Pages serves from `/Elvis_ProfessionalPage/`, test subpath behavi
 
 All asset URLs are **relative** (`css/styles.css`, `asset/...`) for subpath compatibility.
 
-## Contact form setup
+## Contact / intake form
 
-The site contact form does **not** display your email publicly. Submissions are forwarded to you via [Web3Forms](https://web3forms.com/) (free tier works for GitHub Pages).
+Embed a **Google Form** (recommended), **Calendly**, or any link—no backend required. Responses go to Google Sheets if you enable that in Google Forms.
 
-1. Go to [web3forms.com](https://web3forms.com/) and enter the email where you want to receive inquiries.
-2. Copy your **Access Key**.
-3. Paste it into `data/site-config.json`:
+### Google Form (recommended)
+
+1. Create a form at [forms.google.com](https://forms.google.com).
+2. Click **Send** → **<>** (embed) → copy the iframe `src` URL.  
+   It looks like:  
+   `https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true`
+3. Paste into `data/site-config.json`:
 
 ```json
 {
-  "contactForm": {
-    "endpoint": "https://api.web3forms.com/submit",
-    "accessKey": "YOUR_ACCESS_KEY_HERE"
+  "contact": {
+    "intakeEmbedUrl": "https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true",
+    "intakePrimaryLabel": "Send an inquiry",
+    "intakeEmbed": true
   }
 }
 ```
 
-4. Deploy. When someone submits the form, Web3Forms emails you their name, email, organization, inquiry type, and message so you can reach out directly.
+4. Push to GitHub. The form embeds inline on the Contact section.
 
-See `data/site-config.example.json` for the template. Your email is stored only in the Web3Forms dashboard—not in the public HTML.
+**Google Sheets:** In the form editor → **Responses** → link to a spreadsheet. New submissions appear there automatically; optional email notifications under Google Forms settings.
+
+Set `"intakeEmbed": false` to use only the top card link (opens the form in a new tab).
+
+### Calendly (optional)
+
+Use a Calendly URL in `intakeEmbedUrl` instead—the site detects it and loads the Calendly widget.
+
+Until `intakeEmbedUrl` is set, the primary button falls back to LinkedIn.
 
 ## Archived résumé password
 
@@ -115,7 +128,7 @@ Add a privacy-conscious provider by defining before `site.js`:
 </script>
 ```
 
-Tracked events: `cta_nav`, `cta_hero`, `resume_download`, `contact_submit`, `contact_click`, `venture_visit`
+Tracked events: `cta_nav`, `cta_hero`, `resume_download`, `contact_click`, `venture_visit`
 
 ## QA checklist
 

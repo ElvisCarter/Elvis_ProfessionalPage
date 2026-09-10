@@ -1073,97 +1073,50 @@ html.reduce-motion .thought-bubble-stack { animation: none !important; }
 .resume-note { font-size: var(--text-sm); color: var(--color-slate); margin-top: var(--space-4); }
 
 /* ── Contact ── */
-.contact-pathways { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4); }
-.contact-form { margin-top: var(--space-6); }
-.form-row {
+.contact-pathways {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: var(--space-4);
-  margin-bottom: var(--space-4);
+  margin-top: var(--space-6);
 }
-.form-field { display: flex; flex-direction: column; gap: var(--space-2); }
-.form-field label {
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: rgba(243, 235, 221, 0.9);
+.contact-path-primary {
+  border-color: var(--color-burnished-copper);
+  background: rgba(182, 95, 58, 0.1);
 }
-.form-field .required { color: var(--color-copper); }
-.contact-form input,
-.contact-form select,
-.contact-form textarea {
-  width: 100%;
-  padding: var(--space-3) var(--space-4);
-  border: 1px solid var(--color-border-dark);
-  border-radius: var(--radius-md);
-  background: rgba(243, 235, 221, 0.06);
-  color: var(--color-warm-ivory);
-  font: inherit;
-  min-height: 44px;
-}
-.contact-form textarea { min-height: 140px; resize: vertical; }
-.contact-form input:focus,
-.contact-form select:focus,
-.contact-form textarea:focus {
-  outline: 2px solid var(--color-signal-teal);
-  outline-offset: 2px;
-  border-color: var(--color-signal-teal);
-}
-.contact-form select option { color: var(--color-graphite); background: var(--color-warm-ivory); }
-.contact-honeypot {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
-.contact-form-actions { margin-top: var(--space-5); }
-.contact-form-status {
-  margin-top: var(--space-4);
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
-  font-size: var(--text-sm);
-}
-.contact-form-status.is-success {
-  background: rgba(182, 95, 58, 0.15);
-  border: 1px solid rgba(182, 95, 58, 0.4);
-  color: var(--color-warm-ivory);
-}
-.contact-form-status.is-error {
-  background: rgba(182, 95, 58, 0.12);
-  border: 1px solid rgba(182, 95, 58, 0.35);
-  color: var(--color-warm-ivory);
-}
-.contact-social {
-  display: flex;
-  gap: var(--space-4);
+.contact-embed-wrap {
   margin-top: var(--space-7);
-  padding-top: var(--space-6);
-  border-top: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-soft-white);
+  min-height: 720px;
 }
-.contact-social-link {
-  color: var(--color-warm-ivory);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: var(--text-sm);
+.contact-embed-wrap iframe {
+  display: block;
+  width: 100%;
+  min-height: 720px;
+  border: 0;
+  background: var(--color-soft-white);
 }
-.contact-social-link:hover { color: var(--color-burnished-copper); }
+.contact-embed-wrap .calendly-inline-widget {
+  width: 100%;
+  min-height: 700px;
+}
 
 /* Contact — calm closing emergence */
 .contact-section.is-visible .section-header,
-.contact-section.is-visible .contact-form,
-.contact-section.is-visible .contact-social {
+.contact-section.is-visible .contact-pathways,
+.contact-section.is-visible .contact-embed-wrap {
   animation: contactEmerge var(--motion-slow) var(--ease-emerge) both;
 }
-.contact-section.is-visible .contact-form { animation-delay: 100ms; }
-.contact-section.is-visible .contact-social { animation-delay: 200ms; }
+.contact-section.is-visible .contact-pathways { animation-delay: 100ms; }
+.contact-section.is-visible .contact-embed-wrap { animation-delay: 180ms; }
 @keyframes contactEmerge {
   from { opacity: 0; transform: translateY(var(--shift-md)); }
   to { opacity: 1; transform: none; }
 }
 .reduce-motion .contact-section.is-visible .section-header,
-.reduce-motion .contact-section.is-visible .contact-form,
-.reduce-motion .contact-section.is-visible .contact-social { animation: none; }
+.reduce-motion .contact-section.is-visible .contact-pathways,
+.reduce-motion .contact-section.is-visible .contact-embed-wrap { animation: none; }
 
 .section-bridge--ivory-navy::before {
   display: none;

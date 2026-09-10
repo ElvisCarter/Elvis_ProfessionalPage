@@ -942,35 +942,37 @@
 
 
 
-  /* ── Contact form ── */
+  /* ── Contact: Google Form, Calendly, or link from site-config ── */
 
-  function initContactForm() {
+  function isGoogleFormUrl(url) {
+    return /docs\.google\.com\/forms\//i.test(url);
+  }
 
-    var form = document.getElementById('contact-form');
+  function isCalendlyUrl(url) {
+    return /calendly\.com\//i.test(url);
+  }
 
-    if (!form) return;
-
-
-
-    var statusEl = document.getElementById('contact-form-status');
-
-    var submitBtn = form.querySelector('button[type="submit"]');
-
-
-
-    function setStatus(message, type) {
-
-      if (!statusEl) return;
-
-      statusEl.hidden = !message;
-
-      statusEl.textContent = message || '';
-
-      statusEl.classList.remove('is-success', 'is-error');
-
-      if (type) statusEl.classList.add(type);
-
+  function googleFormEmbedUrl(url) {
+    var embed = url.replace(/[?#].*$/, '');
+    if (embed.indexOf('/viewform') === -1) {
+      embed = embed.replace(/\/?$/, '/viewform');
     }
+    return embed + '?embedded=true';
+  }
+
+  function googleFormLinkUrl(url) {
+    return url.replace(/[?#].*$/, '').replace(/\/?$/, '/viewform');
+  }
+
+  function initContactSection() {
+
+    var primaryLink = document.getElementById('contact-intake-primary');
+
+    var primaryLabel = document.getElementById('contact-intake-primary-label');
+
+    var embedWrap = document.getElementById('contact-embed-wrap');
+
+    if (!primaryLink) return;
 
 
 
@@ -982,147 +984,145 @@
 
       .then(function (config) {
 
-        var contactForm = config.contactForm || {};
+        var contact = config.contact || {};
 
-        var endpoint = contactForm.endpoint || 'https://api.web3forms.com/submit';
+        var legacyCalendly = (contact.calendlyUrl || '').trim();
 
-        var accessKey = contactForm.accessKey || '';
+        var embedUrl = (contact.intakeEmbedUrl || legacyCalendly || '').trim();
 
+        var linkUrl = (contact.intakeLinkUrl || embedUrl || '').trim();
 
+        var label = (contact.intakePrimaryLabel || '').trim();
 
-        form.addEventListener('submit', function (e) {
+        var useEmbed = contact.intakeEmbed !== false;
 
-          e.preventDefault();
 
-          setStatus('', '');
 
+        if (label && primaryLabel) primaryLabel.textContent = label;
 
 
-          if (!accessKey) {
 
-            setStatus('The contact form is not configured yet. Please use LinkedIn in the meantime.', 'is-error');
+        if (!linkUrl && !embedUrl) return;
 
-            return;
 
-          }
 
+        if (isGoogleFormUrl(linkUrl || embedUrl)) {
 
+          linkUrl = googleFormLinkUrl(linkUrl || embedUrl);
 
-          if (!form.checkValidity()) {
+          embedUrl = googleFormEmbedUrl(embedUrl || linkUrl);
 
-            form.reportValidity();
+          if (!label && primaryLabel) primaryLabel.textContent = 'Send an inquiry';
 
-            return;
+        } else if (isCalendlyUrl(linkUrl || embedUrl)) {
 
-          }
+          if (!label && primaryLabel) primaryLabel.textContent = 'Schedule a conversation';
 
+        }
 
 
-          var formData = new FormData(form);
 
-          var name = String(formData.get('name') || '').trim();
+        primaryLink.href = linkUrl || embedUrl;
 
-          var email = String(formData.get('email') || '').trim();
+        primaryLink.target = '_blank';
 
-          var company = String(formData.get('company') || '').trim();
+        primaryLink.rel = 'noopener noreferrer';
 
-          var inquiryType = String(formData.get('inquiry_type') || '').trim();
 
-          var message = String(formData.get('message') || '').trim();
 
+        if (!useEmbed || !embedWrap || !embedUrl) return;
 
 
-          var payload = {
 
-            access_key: accessKey,
+        embedWrap.hidden = false;
 
-            name: name,
 
-            email: email,
 
-            subject: 'Elvis S. Site Inquiry: ' + inquiryType + ' — ' + name,
+        if (isGoogleFormUrl(embedUrl)) {
 
-            message: [
+          var iframe = document.createElement('iframe');
 
-              'Inquiry type: ' + inquiryType,
+          iframe.src = embedUrl;
 
-              company ? 'Organization: ' + company : null,
+          iframe.title = label || 'Contact inquiry form';
 
-              '',
+          iframe.loading = 'lazy';
 
-              message
+          iframe.setAttribute('frameborder', '0');
 
-            ].filter(Boolean).join('\n'),
+          iframe.setAttribute('marginheight', '0');
 
-            from_name: 'Elvis S. Professional Page'
+          iframe.setAttribute('marginwidth', '0');
 
-          };
+          embedWrap.innerHTML = '';
 
+          embedWrap.appendChild(iframe);
 
+          return;
 
-          if (submitBtn) {
+        }
 
-            submitBtn.disabled = true;
 
-            submitBtn.textContent = 'Sending…';
 
-          }
+        if (!isCalendlyUrl(embedUrl)) return;
 
 
 
-          fetch(endpoint, {
+        if (!document.querySelector('link[data-calendly-widget]')) {
 
-            method: 'POST',
+          var widgetCss = document.createElement('link');
 
-            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          widgetCss.rel = 'stylesheet';
 
-            body: JSON.stringify(payload)
+          widgetCss.href = 'https://assets.calendly.com/assets/external/widget.css';
 
-          })
+          widgetCss.setAttribute('data-calendly-widget', 'true');
 
-            .then(function (res) { return res.json(); })
+          document.head.appendChild(widgetCss);
 
-            .then(function (data) {
+        }
 
-              if (data.success) {
 
-                form.reset();
 
-                setStatus('Thank you — your inquiry was sent. I will reach out to you directly at the email you provided.', 'is-success');
+        function mountCalendly() {
 
-                if (window.elvisAnalytics && typeof window.elvisAnalytics.track === 'function') {
+          embedWrap.innerHTML = '';
 
-                  window.elvisAnalytics.track('contact_submit', { label: inquiryType });
+          var widget = document.createElement('div');
 
-                }
+          widget.className = 'calendly-inline-widget';
 
-              } else {
+          widget.setAttribute('data-url', embedUrl);
 
-                setStatus(data.message || 'Something went wrong. Please try again or use LinkedIn.', 'is-error');
+          widget.style.minWidth = '320px';
 
-              }
+          widget.style.height = '700px';
 
-            })
+          embedWrap.appendChild(widget);
 
-            .catch(function () {
+        }
 
-              setStatus('Unable to send right now. Please try again or use LinkedIn.', 'is-error');
 
-            })
 
-            .finally(function () {
+        if (window.Calendly) {
 
-              if (submitBtn) {
+          mountCalendly();
 
-                submitBtn.disabled = false;
+          return;
 
-                submitBtn.textContent = 'Send inquiry';
+        }
 
-              }
 
-            });
 
-        });
+        var widgetScript = document.createElement('script');
+
+        widgetScript.src = 'https://assets.calendly.com/assets/external/widget.js';
+
+        widgetScript.async = true;
+
+        widgetScript.onload = mountCalendly;
+
+        document.body.appendChild(widgetScript);
 
       });
 
@@ -1216,7 +1216,7 @@
 
     initArchivedResumeGate();
 
-    initContactForm();
+    initContactSection();
 
     initAnalytics();
 

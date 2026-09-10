@@ -645,53 +645,25 @@
       <div class="container container-narrow">
         <header class="section-header section-header-light">
           <h2 id="contact-title" class="section-title">Bring me the complex problem that crosses boundaries.</h2>
-          <p class="section-lead">Share a few details below. I review every inquiry personally and will reach out to you directly.</p>
+          <p class="section-lead">Send an inquiry below, or connect on LinkedIn or GitHub.</p>
         </header>
 
-        <form id="contact-form" class="contact-form" novalidate>
-          <div class="form-row">
-            <div class="form-field">
-              <label for="contact-name">Name <span class="required">*</span></label>
-              <input type="text" id="contact-name" name="name" autocomplete="name" required>
-            </div>
-            <div class="form-field">
-              <label for="contact-email">Email <span class="required">*</span></label>
-              <input type="email" id="contact-email" name="email" autocomplete="email" required>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-field">
-              <label for="contact-company">Organization</label>
-              <input type="text" id="contact-company" name="company" autocomplete="organization">
-            </div>
-            <div class="form-field">
-              <label for="contact-type">Inquiry type <span class="required">*</span></label>
-              <select id="contact-type" name="inquiry_type" required>
-                <option value="">Select one</option>
-                <option value="Architecture discussion">Technical or architecture discussion</option>
-                <option value="Advisory opportunity">Advisory opportunity</option>
-                <option value="Research collaboration">Research collaboration</option>
-                <option value="Speaking request">Speaking or interview</option>
-                <option value="Venture conversation">Venture conversation</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-field">
-            <label for="contact-message">Message <span class="required">*</span></label>
-            <textarea id="contact-message" name="message" rows="5" required placeholder="What problem are you working through? What would a good outcome look like?"></textarea>
-          </div>
-          <input type="checkbox" name="botcheck" class="contact-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <div class="contact-form-actions">
-            <button type="submit" class="btn btn-primary" data-track="contact_submit" data-track-label="inquiry_form">Send inquiry</button>
-          </div>
-          <p id="contact-form-status" class="contact-form-status" role="status" aria-live="polite" hidden></p>
-        </form>
-
-        <div class="contact-social">
-          <a href="https://www.linkedin.com/in/uniquely-elvis/" class="contact-social-link" target="_blank" rel="noopener noreferrer" data-track="contact_click" data-track-label="linkedin">LinkedIn</a>
-          <a href="https://github.com/ElvisCarter" class="contact-social-link" target="_blank" rel="noopener noreferrer" data-track="contact_click" data-track-label="github">GitHub</a>
+        <div class="contact-pathways">
+          <a id="contact-intake-primary" class="contact-path contact-path-primary" href="https://www.linkedin.com/in/uniquely-elvis/" target="_blank" rel="noopener noreferrer" data-track="contact_click" data-track-label="intake">
+            <span>Start here</span>
+            <strong id="contact-intake-primary-label">Send an inquiry</strong>
+          </a>
+          <a href="https://www.linkedin.com/in/uniquely-elvis/" class="contact-path" target="_blank" rel="noopener noreferrer" data-track="contact_click" data-track-label="linkedin">
+            <span>Professional</span>
+            <strong>LinkedIn</strong>
+          </a>
+          <a href="https://github.com/ElvisCarter" class="contact-path" target="_blank" rel="noopener noreferrer" data-track="contact_click" data-track-label="github">
+            <span>Code &amp; projects</span>
+            <strong>GitHub</strong>
+          </a>
         </div>
+
+        <div id="contact-embed-wrap" class="contact-embed-wrap" hidden aria-label="Contact intake form"></div>
       </div>
     </section>
 
